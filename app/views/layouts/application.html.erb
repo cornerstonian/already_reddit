@@ -8,9 +8,20 @@
 </head>
 <body>
 
-<div class="container">
-  <%= yield %>
-</div>
+
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Already Reddit</h1>
+      <%= link_to 'Home', root_path, class: "btn btn-small btn-success" %>
+      <%= link_to 'New Entry', new_post_path, class: "btn btn-small btn-primary" %>
+      <%= link_to 'Best of the Web', root_path, class: "btn btn-small btn-warning" %>
+
+    </div>
+
+    <%= yield %>
+
+  </div>
 
 </body>
 </html>

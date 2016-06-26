@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-  root'posts#index'
 
-  get 'posts/detail'
+
+  root   'posts#index'
+  get    'posts/new' => 'posts#new', as: :new_post
+  get    'posts/:id' => 'posts#detail', as: :post
+  post   'posts' => 'posts#create'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

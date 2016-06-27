@@ -1,10 +1,24 @@
 Rails.application.routes.draw do
 
-
   root   'posts#index'
   get    'posts/new' => 'posts#new', as: :new_post
-  get    'posts/:id' => 'posts#detail', as: :post
+  get    'posts/:id' => 'posts#show', as: :post
+  get    'posts/:id/edit' => 'posts#edit', as: :edit_post
   post   'posts' => 'posts#create'
+  patch  'posts/:id' => 'posts#update'
+  delete 'posts/:id' => 'posts#delete'
+  get 'posts/:id/upvote' => 'posts#vote_up', as: :vote_up
+
+ patch 'posts/:id/upvote' => 'posts#vote_up'
+
+ get 'posts/:id/downvote' => 'posts#vote_down', as: :vote_down
+
+ patch 'posts/:id/downvote' => 'posts#vote_down'
+
+
+  resources :posts do
+  resources :comments
+end
 
 
 

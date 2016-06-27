@@ -2,13 +2,12 @@
 class PostsController < ApplicationController
 
   def index
-    @post = Post.all
+    @post = Post.all.order("vote_count desc")
   end
 
-  def detail
+  def show
     @post = Post.find_by id: params[:id]
   end
-
 
   def new
      @post = Post.new
@@ -16,8 +15,8 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new
-    @post.name = params[:post][:name]
-    @post.body = params[:post][:body]
+    @post.title = params[:post][:title]
+    @post.url = params[:post][:url]
     if @post.save
       redirect_to posts_path
     else
@@ -47,9 +46,26 @@ class PostsController < ApplicationController
         redirect_to root_path, notice: 'Post Deleted'
     end
 
+    def vote_up
+      @posts = Post.all
+      @post = Post.find_by id: params[:id]
+      @post.vote_count = @post.vote_count.to_i + 1
+      @post.save
+       redirect_to root_path
+     end
+
+     def vote_down
+       @posts = Post.all
+       @post = Post.find_by id: params[:id]
+       @post.vote_count = @post.vote_count.to_i - 1
+       @post.save
+       redirect_to root_path
+     end
+
+
     private
       def post_params
-        params.require(:post).permit(:name, :body)
+        params.require(:post).permit(:title, :body)
       end
 
 

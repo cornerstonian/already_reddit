@@ -1,11 +1,24 @@
-require 'rails_autolink'
-
-
-<h1>Reddit Yet?</h1>
-
-<ul>
+<div>
    <% @post.each do |post| %>
-  <li> <%= link_to post.title, post_path(id: post.id)%> </li>
-  <li> <%= post.url %> </li>
+   <div class= "post-wrapper">
+     <%= link_to post.title, post_path(id: post.id)%><br>
+    <div>
+      <%= link_to vote_up_path(id: post.id), method: :patch do %>
+        <i class= "glyphicon glyphicon-triangle-top"></i>
+      <% end %>
+    </div>
+    <div>
+      <%= post.vote_count.to_i %>
+    </div>
+    <div>
+      <%= link_to vote_down_path(id: post.id), method: :patch do %>
+        <i class= "glyphicon glyphicon-triangle-bottom"></i>
+      <% end %>
+
+        </div>
+        submitted <%= distance_of_time_in_words post.created_at, Time.now %> ago
+        by <%= post.username %>
+        </div>
   <% end %>
-</ul>
+
+</div>

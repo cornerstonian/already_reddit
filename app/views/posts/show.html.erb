@@ -1,0 +1,10 @@
+<h2><%= @post.title %></h2>
+<div class="">
+  <%= auto_link(@post.url) %>
+  <h3><%= pluralize @post.vote_count, 'vote' %> </h3>
+</div>
+
+
+ 
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
